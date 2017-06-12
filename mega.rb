@@ -1,6 +1,8 @@
 require 'restclient'
 require 'nokogiri'
-require "pp"
+require_relative 'lib/colorize'
+
+include Colorize
 
 link = "http://www.calottery.com/play/draw-games/mega-millions/Winning-Numbers/"
 
@@ -27,18 +29,9 @@ data.each do |row|
   }
 end
 
-puts "All draws:"
+puts "Last 20 draws:"
 pp draws
 puts
-
-# Colored Output
-def colorize(text, color_code)
-  "\e[#{color_code}m#{text}\e[0m"
-end
-
-def red(text); colorize(text, 31); end
-def green(text); colorize(text, 32); end
-def yellow(text); colorize(text, 33); end
 
 puts "Betting on: #{green(b_numbers.join(' '))}"
 draws.each do |draw_number, value|
