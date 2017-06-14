@@ -65,5 +65,5 @@ winning_numbers = find_matches(draws, options[:numbers])
 
 winning_numbers.each do |wn|
   puts "Winning draw #{yellow(wn[:draw_number])} on #{yellow(wn[:date])}:
-        matching #{red(wn[:matching_numbers].join(' '))}"
+        matching numbers: [#{red(wn[:matching_numbers].join(' '))}] mega: [#{red(wn[:matching_mega])}]"
 end

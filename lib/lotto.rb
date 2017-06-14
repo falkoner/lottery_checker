@@ -52,19 +52,24 @@ module  Lotto
       draws_found += results
     end
 
-    return draws_found.slice(0, draws_number_requested)
+    return draws_found.slice(0, draws_number_requested + 1)
   end
 
   def find_matches(draw_results, ticket)
+    mega = ticket.last
+    numbers = ticket.slice(0,5)
     matches_found = []
     draw_results.each do |value|
-      numbers_to_check = value[:numbers] + [value[:mega]]
-      common = ( numbers_to_check & ticket)
-      if !common.empty?
+      numbers_to_check = value[:numbers]
+      mega_to_check = value[:mega]
+      common_numbers = ( numbers_to_check & numbers)
+      common_mega = (mega == mega_to_check) ? mega : nil
+      if !common_numbers.empty? || !common_mega.nil?
         matches_found << {
           draw_number: value[:draw],
           date: value[:date],
-          matching_numbers: common
+          matching_numbers: common_numbers,
+          matching_mega: common_mega
         }
       end
     end
