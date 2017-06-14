@@ -1,6 +1,6 @@
 require 'optparse'
 require_relative 'lib/colorize'
-require_relative 'lib/lotto'
+require_relative 'lib/lottofetcher'
 
 include Colorize
 include Lotto
