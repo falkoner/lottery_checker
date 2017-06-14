@@ -4,7 +4,18 @@ require 'nokogiri'
 module  Lotto
 
   def fetch_mega_millions
-    link = "http://www.calottery.com/play/draw-games/mega-millions/Winning-Numbers/"
+    fetch_lotto "http://www.calottery.com/play/draw-games/mega-millions/winning-numbers"
+  end
+
+  def fetch_power_millions
+    fetch_lotto "http://www.calottery.com/play/draw-games/powerball/winning-numbers"
+  end
+
+  def fetch_super_millions
+    fetch_lotto "http://www.calottery.com/play/draw-games/superlotto-plus/winning-numbers"
+  end
+
+  def fetch_lotto link
     page = Nokogiri::HTML(RestClient.get(link))
     draws = {}
 
