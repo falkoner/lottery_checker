@@ -1,4 +1,3 @@
-require 'pp'
 require 'optparse'
 require_relative 'lib/colorize'
 require_relative 'lib/lotto'
@@ -46,18 +45,18 @@ if options[:numbers].nil? || options[:numbers].size != 6
   exit
 end
 
-draws = {}
-draws = fetch_mega_millions() if options[:lotto] == 'mega'
-draws = fetch_power_millions() if options[:lotto] == 'power'
-draws = fetch_super_millions() if options[:lotto] == 'super'
+draws = []
+draws = fetch_mega_millions(options[:draws]) if options[:lotto] == 'mega'
+draws = fetch_power_millions(options[:draws]) if options[:lotto] == 'power'
+draws = fetch_super_millions(options[:draws]) if options[:lotto] == 'super'
 
 if draws.nil? || draws.empty?
   puts "Can't fetch draws"
   exit
 end
 
-puts "Last 20 draws:"
-pp draws
+puts "Last #{draws.size} draws:"
+puts draws
 puts
 
 puts "Betting on #{ALLOWED_LOTTO[options[:lotto]]}: #{green(options[:numbers].join(' '))}"
